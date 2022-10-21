@@ -10,17 +10,20 @@ task :test do
       /hitchwiki/,
       /steemit/
     ],
-    :disable_external => true,
+    :enforce_https => false,
     :cache => {
-      :timeframe => '7d'
+      :timeframe => { :internal => '7d' }
     },
     :typhoeus => {
       :headers => {
         "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
       },
       :followlocation => true,
-      :connecttimeout => 3,
-      :timeout => 5
+      :connecttimeout => 5,
+      :timeout => 15
+    },
+    hydra: {
+      :max_concurrency => 3
     },
     :parallel => {
       :in_processes => 3
